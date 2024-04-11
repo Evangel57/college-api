@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "work_types",
+  "info": {
+    "singularName": "work-type",
+    "pluralName": "work-types",
+    "displayName": "workType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "minLength": 1,
+      "unique": true
+    }
+  }
+}

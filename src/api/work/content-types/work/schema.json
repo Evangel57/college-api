@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "works",
+  "info": {
+    "singularName": "work",
+    "pluralName": "works",
+    "displayName": "work",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::student.student"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": false,
+      "maxLength": 500
+    },
+    "dateOfPublication": {
+      "type": "date"
+    },
+    "work_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::work-type.work-type"
+    },
+    "link": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1
+    },
+    "photo": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "file": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
