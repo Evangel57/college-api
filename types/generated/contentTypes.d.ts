@@ -876,7 +876,6 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'api::specialty.specialty'
     >;
     profilePicture: Attribute.Media;
-    dateOfRegistration: Attribute.Date;
     technologies: Attribute.String &
       Attribute.SetMinMaxLength<{
         maxLength: 50;

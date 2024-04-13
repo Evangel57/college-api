@@ -57,9 +57,6 @@
         "images"
       ]
     },
-    "dateOfRegistration": {
-      "type": "date"
-    },
     "technologies": {
       "type": "string",
       "maxLength": 50
