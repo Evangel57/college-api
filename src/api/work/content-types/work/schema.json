@@ -28,9 +28,6 @@
       "required": false,
       "maxLength": 500
     },
-    "dateOfPublication": {
-      "type": "date"
-    },
     "work_type": {
       "type": "relation",
       "relation": "oneToOne",
@@ -42,19 +39,26 @@
       "minLength": 1
     },
     "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "markupWithBackground": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

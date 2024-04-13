@@ -695,7 +695,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -876,61 +875,23 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'oneToOne',
       'api::specialty.specialty'
     >;
-    technologies: Attribute.Relation<
-      'api::student.student',
-      'oneToMany',
-      'api::technology.technology'
-    >;
     profilePicture: Attribute.Media;
     dateOfRegistration: Attribute.Date;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTechnologyTechnology extends Schema.CollectionType {
-  collectionName: 'technologies';
-  info: {
-    singularName: 'technology';
-    pluralName: 'technologies';
-    displayName: 'technology';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
+    technologies: Attribute.String &
       Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 30;
+        maxLength: 50;
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::technology.technology',
+      'api::student.student',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::technology.technology',
+      'api::student.student',
       'oneToOne',
       'admin::user'
     > &
@@ -965,7 +926,6 @@ export interface ApiWorkWork extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         maxLength: 500;
       }>;
-    dateOfPublication: Attribute.Date;
     work_type: Attribute.Relation<
       'api::work.work',
       'oneToOne',
@@ -978,6 +938,9 @@ export interface ApiWorkWork extends Schema.CollectionType {
       }>;
     photo: Attribute.Media;
     file: Attribute.Media;
+    markupWithBackground: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1044,7 +1007,6 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::specialty.specialty': ApiSpecialtySpecialty;
       'api::student.student': ApiStudentStudent;
-      'api::technology.technology': ApiTechnologyTechnology;
       'api::work.work': ApiWorkWork;
       'api::work-type.work-type': ApiWorkTypeWorkType;
     }

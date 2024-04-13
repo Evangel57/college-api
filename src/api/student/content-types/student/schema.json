@@ -49,11 +49,6 @@
       "relation": "oneToOne",
       "target": "api::specialty.specialty"
     },
-    "technologies": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::technology.technology"
-    },
     "profilePicture": {
       "type": "media",
       "multiple": false,
@@ -64,6 +59,10 @@
     },
     "dateOfRegistration": {
       "type": "date"
+    },
+    "technologies": {
+      "type": "string",
+      "maxLength": 50
     }
   }
 }
