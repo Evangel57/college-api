@@ -64,6 +64,11 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "specialty": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::specialty.specialty"
     }
   }
 }

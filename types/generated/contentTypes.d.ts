@@ -723,6 +723,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    specialty: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::specialty.specialty'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
