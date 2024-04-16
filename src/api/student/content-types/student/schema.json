@@ -60,21 +60,6 @@
     "technologies": {
       "type": "string",
       "maxLength": 50
-    },
-    "linkToGit": {
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5
-    },
-    "linkToBehance": {
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5
-    },
-    "linkToVk": {
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 5
     }
   }
 }
