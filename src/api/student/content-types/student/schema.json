@@ -52,14 +52,15 @@
     "profilePicture": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ]
     },
     "technologies": {
       "type": "string",
-      "maxLength": 50
+      "maxLength": 50,
+      "required": true
     },
     "linkToGit": {
       "type": "string",

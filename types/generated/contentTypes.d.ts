@@ -880,8 +880,9 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'oneToOne',
       'api::specialty.specialty'
     >;
-    profilePicture: Attribute.Media;
+    profilePicture: Attribute.Media & Attribute.Required;
     technologies: Attribute.String &
+      Attribute.Required &
       Attribute.SetMinMaxLength<{
         maxLength: 50;
       }>;
