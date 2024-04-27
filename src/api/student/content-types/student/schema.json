@@ -18,15 +18,9 @@
       "minLength": 1,
       "required": true
     },
-    "name": {
-      "type": "string",
-      "maxLength": 100,
-      "minLength": 1,
-      "required": true
-    },
     "patronymic": {
       "type": "string",
-      "required": true,
+      "required": false,
       "maxLength": 100,
       "minLength": 1
     },
@@ -44,15 +38,10 @@
       "minLength": 1,
       "maxLength": 500
     },
-    "specialty": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::specialty.specialty"
-    },
     "profilePicture": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -64,18 +53,30 @@
     },
     "linkToGit": {
       "type": "string",
-      "maxLength": 50,
-      "minLength": 5
+      "maxLength": 50
     },
     "linkToBehance": {
       "type": "string",
-      "maxLength": 50,
-      "minLength": 5
+      "maxLength": 50
     },
     "linkToVK": {
       "type": "string",
       "maxLength": 50,
-      "minLength": 5
+      "required": false
+    },
+    "name": {
+      "type": "text",
+      "required": true,
+      "unique": false,
+      "maxLength": 50,
+      "minLength": 1
+    },
+    "specialty": {
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 1,
+      "unique": false,
+      "required": true
     }
   }
 }
