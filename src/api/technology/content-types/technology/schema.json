@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "technologies",
+  "info": {
+    "singularName": "technology",
+    "pluralName": "technologies",
+    "displayName": "technology",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "maxLength": 25,
+      "unique": true,
+      "minLength": 1,
+      "required": true
+    },
+    "student_technology": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::student-technology.student-technology",
+      "inversedBy": "technologies"
+    }
+  }
+}

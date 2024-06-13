@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "specializations",
+  "info": {
+    "singularName": "specialization",
+    "pluralName": "specializations",
+    "displayName": "specialization",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "maxLength": 50,
+      "unique": true,
+      "minLength": 1,
+      "required": true
+    }
+  }
+}

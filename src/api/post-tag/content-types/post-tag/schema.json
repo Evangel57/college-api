@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "post_tags",
+  "info": {
+    "singularName": "post-tag",
+    "pluralName": "post-tags",
+    "displayName": "post_tag"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "post_tag"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "post_tag"
+    }
+  }
+}

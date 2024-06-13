@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "required": false,
+      "unique": true,
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "urls_photos": {
+      "type": "text",
+      "unique": true,
+      "minLength": 1,
+      "maxLength": 800
+    },
+    "url_view": {
+      "type": "string",
+      "required": false,
+      "unique": true,
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "url_file": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "unique": true
+    },
+    "worktype": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::worktype.worktype"
+    },
+    "background": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "post_tag": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post-tag.post-tag",
+      "inversedBy": "posts"
+    },
+    "published": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

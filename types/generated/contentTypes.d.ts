@@ -362,218 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiSpecialtySpecialty extends Schema.CollectionType {
-  collectionName: 'specialties';
-  info: {
-    singularName: 'specialty';
-    pluralName: 'specialties';
-    displayName: 'specialty';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 100;
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::specialty.specialty',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::specialty.specialty',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiStudentStudent extends Schema.CollectionType {
-  collectionName: 'students';
-  info: {
-    singularName: 'student';
-    pluralName: 'students';
-    displayName: 'student';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    surname: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 50;
-      }>;
-    patronymic: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 100;
-      }>;
-    course: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 4;
-        },
-        number
-      > &
-      Attribute.DefaultTo<1>;
-    description: Attribute.Text &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 500;
-      }>;
-    profilePicture: Attribute.Media;
-    technologies: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 50;
-      }>;
-    linkToGit: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 50;
-      }>;
-    linkToBehance: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 50;
-      }>;
-    linkToVK: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 50;
-      }>;
-    name: Attribute.Text &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 50;
-      }>;
-    specialty: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 50;
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWorkWork extends Schema.CollectionType {
-  collectionName: 'works';
-  info: {
-    singularName: 'work';
-    pluralName: 'works';
-    displayName: 'work';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    author: Attribute.Relation<
-      'api::work.work',
-      'oneToOne',
-      'api::student.student'
-    >;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 100;
-      }>;
-    description: Attribute.Text &
-      Attribute.SetMinMaxLength<{
-        maxLength: 500;
-      }>;
-    work_type: Attribute.Relation<
-      'api::work.work',
-      'oneToOne',
-      'api::work-type.work-type'
-    >;
-    link: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 200;
-      }>;
-    photo: Attribute.Media;
-    file: Attribute.Media;
-    markupWithBackground: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::work.work', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::work.work', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWorkTypeWorkType extends Schema.CollectionType {
-  collectionName: 'work_types';
-  info: {
-    singularName: 'work-type';
-    pluralName: 'work-types';
-    displayName: 'workType';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-        maxLength: 30;
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::work-type.work-type',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::work-type.work-type',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -982,21 +770,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    specialty: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::specialty.specialty'
-    >;
-    course: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 4;
-        },
-        number
-      > &
-      Attribute.DefaultTo<1>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1014,6 +787,406 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'post';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 100;
+      }>;
+    description: Attribute.Text &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 500;
+      }>;
+    urls_photos: Attribute.Text &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 800;
+      }>;
+    url_view: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 200;
+      }>;
+    url_file: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 200;
+      }>;
+    worktype: Attribute.Relation<
+      'api::post.post',
+      'oneToOne',
+      'api::worktype.worktype'
+    >;
+    background: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    post_tag: Attribute.Relation<
+      'api::post.post',
+      'manyToOne',
+      'api::post-tag.post-tag'
+    >;
+    published: Attribute.Boolean & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostTagPostTag extends Schema.CollectionType {
+  collectionName: 'post_tags';
+  info: {
+    singularName: 'post-tag';
+    pluralName: 'post-tags';
+    displayName: 'post_tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    posts: Attribute.Relation<
+      'api::post-tag.post-tag',
+      'oneToMany',
+      'api::post.post'
+    >;
+    tags: Attribute.Relation<
+      'api::post-tag.post-tag',
+      'oneToMany',
+      'api::tag.tag'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::post-tag.post-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::post-tag.post-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSpecializationSpecialization extends Schema.CollectionType {
+  collectionName: 'specializations';
+  info: {
+    singularName: 'specialization';
+    pluralName: 'specializations';
+    displayName: 'specialization';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 50;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::specialization.specialization',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::specialization.specialization',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudentStudent extends Schema.CollectionType {
+  collectionName: 'students';
+  info: {
+    singularName: 'student';
+    pluralName: 'students';
+    displayName: 'student';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 50;
+      }>;
+    surname: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 50;
+      }>;
+    patronymic: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 50;
+      }>;
+    course: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 4;
+        },
+        number
+      > &
+      Attribute.DefaultTo<1>;
+    specialization: Attribute.Relation<
+      'api::student.student',
+      'oneToOne',
+      'api::specialization.specialization'
+    >;
+    url_github: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 200;
+      }>;
+    url_behance: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 200;
+      }>;
+    url_vk: Attribute.String &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 200;
+      }>;
+    url_photo: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 200;
+      }>;
+    about_info: Attribute.Text &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 500;
+      }>;
+    student_technology: Attribute.Relation<
+      'api::student.student',
+      'manyToOne',
+      'api::student-technology.student-technology'
+    >;
+    published: Attribute.Boolean & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::student.student',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::student.student',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudentTechnologyStudentTechnology
+  extends Schema.CollectionType {
+  collectionName: 'student_technologies';
+  info: {
+    singularName: 'student-technology';
+    pluralName: 'student-technologies';
+    displayName: 'student_technology';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    technologies: Attribute.Relation<
+      'api::student-technology.student-technology',
+      'oneToMany',
+      'api::technology.technology'
+    >;
+    students: Attribute.Relation<
+      'api::student-technology.student-technology',
+      'oneToMany',
+      'api::student.student'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::student-technology.student-technology',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::student-technology.student-technology',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'tag';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 25;
+      }>;
+    post_tag: Attribute.Relation<
+      'api::tag.tag',
+      'manyToOne',
+      'api::post-tag.post-tag'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTechnologyTechnology extends Schema.CollectionType {
+  collectionName: 'technologies';
+  info: {
+    singularName: 'technology';
+    pluralName: 'technologies';
+    displayName: 'technology';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 25;
+      }>;
+    student_technology: Attribute.Relation<
+      'api::technology.technology',
+      'manyToOne',
+      'api::student-technology.student-technology'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::technology.technology',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::technology.technology',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWorktypeWorktype extends Schema.CollectionType {
+  collectionName: 'worktypes';
+  info: {
+    singularName: 'worktype';
+    pluralName: 'worktypes';
+    displayName: 'worktype';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 50;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::worktype.worktype',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::worktype.worktype',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1024,10 +1197,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::specialty.specialty': ApiSpecialtySpecialty;
-      'api::student.student': ApiStudentStudent;
-      'api::work.work': ApiWorkWork;
-      'api::work-type.work-type': ApiWorkTypeWorkType;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -1036,6 +1205,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::post.post': ApiPostPost;
+      'api::post-tag.post-tag': ApiPostTagPostTag;
+      'api::specialization.specialization': ApiSpecializationSpecialization;
+      'api::student.student': ApiStudentStudent;
+      'api::student-technology.student-technology': ApiStudentTechnologyStudentTechnology;
+      'api::tag.tag': ApiTagTag;
+      'api::technology.technology': ApiTechnologyTechnology;
+      'api::worktype.worktype': ApiWorktypeWorktype;
     }
   }
 }

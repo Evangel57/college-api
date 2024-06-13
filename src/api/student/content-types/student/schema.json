@@ -12,71 +12,81 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "maxLength": 50,
+      "required": true,
+      "minLength": 1
+    },
     "surname": {
       "type": "string",
+      "unique": true,
       "maxLength": 50,
-      "minLength": 1,
-      "required": true
+      "required": true,
+      "minLength": 1
     },
     "patronymic": {
       "type": "string",
       "required": false,
-      "maxLength": 100,
+      "unique": true,
+      "maxLength": 50,
       "minLength": 1
     },
     "course": {
       "type": "integer",
       "default": 1,
-      "min": 1,
       "max": 4,
-      "required": true
-    },
-    "description": {
-      "type": "text",
-      "unique": false,
+      "min": 1,
       "required": true,
-      "minLength": 1,
-      "maxLength": 500
+      "unique": true
     },
-    "profilePicture": {
-      "type": "media",
-      "multiple": false,
+    "specialization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::specialization.specialization"
+    },
+    "url_github": {
+      "type": "string",
+      "unique": true,
+      "maxLength": 200,
+      "minLength": 10
+    },
+    "url_behance": {
+      "type": "string",
+      "unique": true,
+      "maxLength": 200,
+      "minLength": 10
+    },
+    "url_vk": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200,
+      "unique": true
+    },
+    "url_photo": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 10,
+      "maxLength": 200
+    },
+    "about_info": {
+      "type": "text",
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "unique": true,
+      "maxLength": 500,
+      "minLength": 10
     },
-    "technologies": {
-      "type": "string",
-      "maxLength": 50,
-      "required": true
+    "student_technology": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::student-technology.student-technology",
+      "inversedBy": "students"
     },
-    "linkToGit": {
-      "type": "string",
-      "maxLength": 50
-    },
-    "linkToBehance": {
-      "type": "string",
-      "maxLength": 50
-    },
-    "linkToVK": {
-      "type": "string",
-      "maxLength": 50,
-      "required": false
-    },
-    "name": {
-      "type": "text",
-      "required": true,
-      "unique": false,
-      "maxLength": 50,
-      "minLength": 1
-    },
-    "specialty": {
-      "type": "string",
-      "maxLength": 50,
-      "minLength": 1,
-      "unique": false,
-      "required": true
+    "published": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
