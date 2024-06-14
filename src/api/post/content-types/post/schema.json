@@ -15,27 +15,27 @@
     "title": {
       "type": "string",
       "required": true,
-      "unique": true,
+      "unique": false,
       "minLength": 1,
       "maxLength": 100
     },
     "description": {
       "type": "text",
       "required": false,
-      "unique": true,
+      "unique": false,
       "minLength": 1,
       "maxLength": 500
     },
     "urls_photos": {
       "type": "text",
-      "unique": true,
+      "unique": false,
       "minLength": 1,
       "maxLength": 800
     },
     "url_view": {
       "type": "string",
       "required": false,
-      "unique": true,
+      "unique": false,
       "minLength": 1,
       "maxLength": 200
     },
@@ -43,7 +43,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 200,
-      "unique": true
+      "unique": false
     },
     "worktype": {
       "type": "relation",
@@ -64,6 +64,12 @@
     "published": {
       "type": "boolean",
       "default": false
+    },
+    "student_post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::student-post.student-post",
+      "inversedBy": "posts"
     }
   }
 }

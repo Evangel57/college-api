@@ -801,31 +801,26 @@ export interface ApiPostPost extends Schema.CollectionType {
   attributes: {
     title: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 100;
       }>;
     description: Attribute.Text &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 500;
       }>;
     urls_photos: Attribute.Text &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 800;
       }>;
     url_view: Attribute.String &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 200;
       }>;
     url_file: Attribute.String &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 200;
@@ -844,6 +839,11 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::post-tag.post-tag'
     >;
     published: Attribute.Boolean & Attribute.DefaultTo<false>;
+    student_post: Attribute.Relation<
+      'api::post.post',
+      'manyToOne',
+      'api::student-post.student-post'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -944,27 +944,23 @@ export interface ApiStudentStudent extends Schema.CollectionType {
   attributes: {
     name: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 50;
       }>;
     surname: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 50;
       }>;
     patronymic: Attribute.String &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
         maxLength: 50;
       }>;
     course: Attribute.Integer &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetMinMax<
         {
           min: 1;
@@ -979,32 +975,27 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'api::specialization.specialization'
     >;
     url_github: Attribute.String &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 10;
         maxLength: 200;
       }>;
     url_behance: Attribute.String &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 10;
         maxLength: 200;
       }>;
     url_vk: Attribute.String &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 10;
         maxLength: 200;
       }>;
     url_photo: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 10;
         maxLength: 200;
       }>;
     about_info: Attribute.Text &
-      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 10;
         maxLength: 500;
@@ -1015,6 +1006,11 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'api::student-technology.student-technology'
     >;
     published: Attribute.Boolean & Attribute.DefaultTo<false>;
+    student_post: Attribute.Relation<
+      'api::student.student',
+      'manyToOne',
+      'api::student-post.student-post'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1026,6 +1022,46 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::student.student',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStudentPostStudentPost extends Schema.CollectionType {
+  collectionName: 'student_posts';
+  info: {
+    singularName: 'student-post';
+    pluralName: 'student-posts';
+    displayName: 'student_post';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    students: Attribute.Relation<
+      'api::student-post.student-post',
+      'oneToMany',
+      'api::student.student'
+    >;
+    posts: Attribute.Relation<
+      'api::student-post.student-post',
+      'oneToMany',
+      'api::post.post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::student-post.student-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::student-post.student-post',
       'oneToOne',
       'admin::user'
     > &
@@ -1209,6 +1245,7 @@ declare module '@strapi/types' {
       'api::post-tag.post-tag': ApiPostTagPostTag;
       'api::specialization.specialization': ApiSpecializationSpecialization;
       'api::student.student': ApiStudentStudent;
+      'api::student-post.student-post': ApiStudentPostStudentPost;
       'api::student-technology.student-technology': ApiStudentTechnologyStudentTechnology;
       'api::tag.tag': ApiTagTag;
       'api::technology.technology': ApiTechnologyTechnology;
