@@ -65,10 +65,10 @@
       "type": "boolean",
       "default": false
     },
-    "student_post": {
+    "student": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::student-post.student-post",
+      "target": "api::student.student",
       "inversedBy": "posts"
     }
   }

@@ -41,11 +41,6 @@
       "required": true,
       "unique": false
     },
-    "specialization": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::specialization.specialization"
-    },
     "url_github": {
       "type": "string",
       "unique": false,
@@ -88,10 +83,16 @@
       "type": "boolean",
       "default": false
     },
-    "student_post": {
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "student"
+    },
+    "specialization": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::student-post.student-post",
+      "target": "api::specialization.specialization",
       "inversedBy": "students"
     }
   }

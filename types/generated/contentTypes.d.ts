@@ -839,10 +839,10 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::post-tag.post-tag'
     >;
     published: Attribute.Boolean & Attribute.DefaultTo<false>;
-    student_post: Attribute.Relation<
+    student: Attribute.Relation<
       'api::post.post',
       'manyToOne',
-      'api::student-post.student-post'
+      'api::student.student'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -912,6 +912,11 @@ export interface ApiSpecializationSpecialization extends Schema.CollectionType {
         minLength: 1;
         maxLength: 50;
       }>;
+    students: Attribute.Relation<
+      'api::specialization.specialization',
+      'oneToMany',
+      'api::student.student'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -969,11 +974,6 @@ export interface ApiStudentStudent extends Schema.CollectionType {
         number
       > &
       Attribute.DefaultTo<1>;
-    specialization: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'api::specialization.specialization'
-    >;
     url_github: Attribute.String &
       Attribute.SetMinMaxLength<{
         minLength: 10;
@@ -1006,62 +1006,27 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'api::student-technology.student-technology'
     >;
     published: Attribute.Boolean & Attribute.DefaultTo<false>;
-    student_post: Attribute.Relation<
-      'api::student.student',
-      'manyToOne',
-      'api::student-post.student-post'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiStudentPostStudentPost extends Schema.CollectionType {
-  collectionName: 'student_posts';
-  info: {
-    singularName: 'student-post';
-    pluralName: 'student-posts';
-    displayName: 'student_post';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    students: Attribute.Relation<
-      'api::student-post.student-post',
-      'oneToMany',
-      'api::student.student'
-    >;
     posts: Attribute.Relation<
-      'api::student-post.student-post',
+      'api::student.student',
       'oneToMany',
       'api::post.post'
     >;
+    specialization: Attribute.Relation<
+      'api::student.student',
+      'manyToOne',
+      'api::specialization.specialization'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::student-post.student-post',
+      'api::student.student',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::student-post.student-post',
+      'api::student.student',
       'oneToOne',
       'admin::user'
     > &
@@ -1245,7 +1210,6 @@ declare module '@strapi/types' {
       'api::post-tag.post-tag': ApiPostTagPostTag;
       'api::specialization.specialization': ApiSpecializationSpecialization;
       'api::student.student': ApiStudentStudent;
-      'api::student-post.student-post': ApiStudentPostStudentPost;
       'api::student-technology.student-technology': ApiStudentTechnologyStudentTechnology;
       'api::tag.tag': ApiTagTag;
       'api::technology.technology': ApiTechnologyTechnology;
