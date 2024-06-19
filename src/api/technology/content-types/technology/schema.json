@@ -19,11 +19,11 @@
       "minLength": 1,
       "required": true
     },
-    "student_technology": {
+    "students": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::student-technology.student-technology",
-      "inversedBy": "technologies"
+      "relation": "manyToMany",
+      "target": "api::student.student",
+      "mappedBy": "technologies"
     }
   }
 }

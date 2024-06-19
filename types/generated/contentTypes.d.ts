@@ -833,62 +833,19 @@ export interface ApiPostPost extends Schema.CollectionType {
     background: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    post_tag: Attribute.Relation<
-      'api::post.post',
-      'manyToOne',
-      'api::post-tag.post-tag'
-    >;
     published: Attribute.Boolean & Attribute.DefaultTo<false>;
     student: Attribute.Relation<
       'api::post.post',
       'manyToOne',
       'api::student.student'
     >;
+    tags: Attribute.Relation<'api::post.post', 'manyToMany', 'api::tag.tag'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPostTagPostTag extends Schema.CollectionType {
-  collectionName: 'post_tags';
-  info: {
-    singularName: 'post-tag';
-    pluralName: 'post-tags';
-    displayName: 'post_tag';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    posts: Attribute.Relation<
-      'api::post-tag.post-tag',
-      'oneToMany',
-      'api::post.post'
-    >;
-    tags: Attribute.Relation<
-      'api::post-tag.post-tag',
-      'oneToMany',
-      'api::tag.tag'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::post-tag.post-tag',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::post-tag.post-tag',
-      'oneToOne',
-      'admin::user'
-    > &
       Attribute.Private;
   };
 }
@@ -1000,11 +957,6 @@ export interface ApiStudentStudent extends Schema.CollectionType {
         minLength: 10;
         maxLength: 500;
       }>;
-    student_technology: Attribute.Relation<
-      'api::student.student',
-      'manyToOne',
-      'api::student-technology.student-technology'
-    >;
     published: Attribute.Boolean & Attribute.DefaultTo<false>;
     posts: Attribute.Relation<
       'api::student.student',
@@ -1016,58 +968,22 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'manyToOne',
       'api::specialization.specialization'
     >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::student.student',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiStudentTechnologyStudentTechnology
-  extends Schema.CollectionType {
-  collectionName: 'student_technologies';
-  info: {
-    singularName: 'student-technology';
-    pluralName: 'student-technologies';
-    displayName: 'student_technology';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
     technologies: Attribute.Relation<
-      'api::student-technology.student-technology',
-      'oneToMany',
+      'api::student.student',
+      'manyToMany',
       'api::technology.technology'
     >;
-    students: Attribute.Relation<
-      'api::student-technology.student-technology',
-      'oneToMany',
-      'api::student.student'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::student-technology.student-technology',
+      'api::student.student',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::student-technology.student-technology',
+      'api::student.student',
       'oneToOne',
       'admin::user'
     > &
@@ -1094,10 +1010,11 @@ export interface ApiTagTag extends Schema.CollectionType {
         minLength: 1;
         maxLength: 25;
       }>;
-    post_tag: Attribute.Relation<
+    posts: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::post.post'>;
+    tags_category: Attribute.Relation<
       'api::tag.tag',
-      'manyToOne',
-      'api::post-tag.post-tag'
+      'oneToOne',
+      'api::tags-category.tags-category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1105,6 +1022,43 @@ export interface ApiTagTag extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagsCategoryTagsCategory extends Schema.CollectionType {
+  collectionName: 'tags_categories';
+  info: {
+    singularName: 'tags-category';
+    pluralName: 'tags-categories';
+    displayName: 'Category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 50;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tags-category.tags-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tags-category.tags-category',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1128,10 +1082,10 @@ export interface ApiTechnologyTechnology extends Schema.CollectionType {
         minLength: 1;
         maxLength: 25;
       }>;
-    student_technology: Attribute.Relation<
+    students: Attribute.Relation<
       'api::technology.technology',
-      'manyToOne',
-      'api::student-technology.student-technology'
+      'manyToMany',
+      'api::student.student'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1207,11 +1161,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::post.post': ApiPostPost;
-      'api::post-tag.post-tag': ApiPostTagPostTag;
       'api::specialization.specialization': ApiSpecializationSpecialization;
       'api::student.student': ApiStudentStudent;
-      'api::student-technology.student-technology': ApiStudentTechnologyStudentTechnology;
       'api::tag.tag': ApiTagTag;
+      'api::tags-category.tags-category': ApiTagsCategoryTagsCategory;
       'api::technology.technology': ApiTechnologyTechnology;
       'api::worktype.worktype': ApiWorktypeWorktype;
     }

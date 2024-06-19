@@ -73,12 +73,6 @@
       "maxLength": 500,
       "minLength": 10
     },
-    "student_technology": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::student-technology.student-technology",
-      "inversedBy": "students"
-    },
     "published": {
       "type": "boolean",
       "default": false
@@ -93,6 +87,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::specialization.specialization",
+      "inversedBy": "students"
+    },
+    "technologies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::technology.technology",
       "inversedBy": "students"
     }
   }

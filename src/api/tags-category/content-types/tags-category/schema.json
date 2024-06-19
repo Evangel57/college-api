@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags_categories",
+  "info": {
+    "singularName": "tags-category",
+    "pluralName": "tags-categories",
+    "displayName": "Category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "category": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "minLength": 2,
+      "unique": true
+    }
+  }
+}

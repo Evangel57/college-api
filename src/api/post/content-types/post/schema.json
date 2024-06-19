@@ -55,12 +55,6 @@
       "default": false,
       "required": true
     },
-    "post_tag": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::post-tag.post-tag",
-      "inversedBy": "posts"
-    },
     "published": {
       "type": "boolean",
       "default": false
@@ -70,6 +64,12 @@
       "relation": "manyToOne",
       "target": "api::student.student",
       "inversedBy": "posts"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "posts"
     }
   }
 }

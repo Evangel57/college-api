@@ -19,11 +19,16 @@
       "minLength": 1,
       "required": true
     },
-    "post_tag": {
+    "posts": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::post-tag.post-tag",
+      "relation": "manyToMany",
+      "target": "api::post.post",
       "inversedBy": "tags"
+    },
+    "tags_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tags-category.tags-category"
     }
   }
 }
